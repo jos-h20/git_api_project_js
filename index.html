@@ -10,20 +10,29 @@
     <title>Something</title>
   </head>
   <body>
+    <div class="jumbotron">
+      <h1 class="header">Explore Git.</h1>
+    </div>
     <div class="container">
-      <div class="jumbotron">
-        <h1>Explore Git.</h1>
-      </div>
-      <div class="col-sm-6">
-        <h2 id="date"> </h2>
+      <div class="col-sm-6 form">
         <form id="search_form">
-            <label for="user_name">Enter Git User Name:</label>
-            <input id="user_name" type="text"><br>
-            <button type="submit">Submit</button>
-          </form>      </div>
-      <div id="results" class="col-sm-6">
-
+          <label for="user_name">Enter Git User Name:</label>
+          <input id="user_name" type="text"><br>
+          <button class="btn btn-secondary" type="submit">Launch</button>
+          <input type="reset" value="Return" class="btn sub" onClick="window.location.reload()">
+        </form>
+        <h4 id="date"> </h4>
+      </div>
+      <div class="col-sm-6 index">
+        <p id="results"></p>
       </div>
     </div>
+    <div class="navbar navbar-fixed-bottom" role="navigation">
+    <div class="container">
+        <div class="navbar-text pull-left">
+            <p>© 2016 Josh Overly.</p>
+        </div>
+    </div>
+  </div>
   </body>
 </html>

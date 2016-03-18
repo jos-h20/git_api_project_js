@@ -4,30 +4,26 @@ exports.apiKey = "546ee333c33e70b48b237ac55869bc50711311b2";
 },{}],2:[function(require,module,exports){
 var apiKey = require('./../.env').apiKey;
 var time = require('./../js/time.js').time;
-// var Repo = require('./../js/repo.js').Repo;
+
 exports.getRepos = function(){
   var user_name = $('#user_name').val();
   $.get('https://api.github.com/users/' + user_name + '/repos?access_token=' + apiKey).then(function(response){
 console.log(response);
     for (var property of response) {
-      $('#results').append('<h3>Repo Name: <em>' + property.name + '</em></h3></br>');
-      $('#results').append('<h4>Repo Description:</h4></br><h4>' + property.description + '</h4></br>');
-      $('#results').append('<h4>It was created on ' + time(property.pushed_at) + '.</h4></br>');
-      $('#results').append('<h4>It was last updated on ' + time(property.updated_at) + '.</h4></br>');
+      $('.index').show();
+      $('#results').append('<h3>Repo Name: <strong>' + property.name + '</strong></h3></br>');
+      $('#results').append('<h4>Repo Description:</h4><h4><em>' + property.description + '</em></h4></br>');
+      $('#results').append('<p>It was <strong>created</strong> on ' + time(property.pushed_at) + '.</p>');
+      $('#results').append('<p>It was last <strong>updated</strong> on ' + time(property.updated_at) + '.</p></br>');
+      $('results').append('</hr>')
     }
-
   }).fail(function(error){
     console.log("There was a big ole' error in trying to find that.");
+    console.log(error.responseJSON.message);
   });
 };
 
-},{"./../.env":1,"./../js/time.js":4}],3:[function(require,module,exports){
-exports.Repo = function(repo_name, repo_description) {
-  this.repo_name = repo_name;
-  this.repo_description = repo_description;
-};
-
-},{}],4:[function(require,module,exports){
+},{"./../.env":1,"./../js/time.js":3}],3:[function(require,module,exports){
 var moment = require('moment');
 
 exports.time = function (unix_time) {
@@ -35,7 +31,7 @@ var time = moment(unix_time).format("dddd, MMMM Do YYYY, h:mm a");
 return time;
 };
 
-},{"moment":5}],5:[function(require,module,exports){
+},{"moment":4}],4:[function(require,module,exports){
 //! moment.js
 //! version : 2.12.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -3724,20 +3720,16 @@ return time;
     return _moment;
 
 }));
-},{}],6:[function(require,module,exports){
-var Repo = require('./../js/repo.js').Repo;
+},{}],5:[function(require,module,exports){
 var getRepos = require('./../js/get_repos.js').getRepos;
-var apiKey = require('./../.env').apiKey;
-
 
 $(document).ready(function(){
+  $('#date').text(moment().format("dddd, MMMM Do YYYY, h:mm a"));
   $('#search_form').submit(function(event){
     event.preventDefault();
     $('#results').empty();
-    $('#date').text(moment(
-"2014-09-02T22:10:13Z").format("dddd, MMMM Do YYYY, h:mm a"));
     getRepos();
   });
 });
 
-},{"./../.env":1,"./../js/get_repos.js":2,"./../js/repo.js":3}]},{},[6]);
+},{"./../js/get_repos.js":2}]},{},[5]);
