@@ -1,5 +1,5 @@
 {
-  "name": "template",
+  "name": "git_explore",
   "version": "1.0.0",
   "description": "an awesome alarm clock",
   "main": "gulpfile.js",
@@ -30,8 +30,8 @@
   "scripts": {
     "test": "mocha test"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Josh Overly",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jos-h20/js-template.git"
@@ -39,5 +39,10 @@
   "bugs": {
     "url": "https://github.com/jos-h20/js-template/issues"
   },
-  "homepage": "https://github.com/jos-h20/js-template#readme"
+  "homepage": "https://github.com/jos-h20/js-template#readme",
+  "keywords": [
+    "git",
+    "repository",
+    "description"
+  ]
 }

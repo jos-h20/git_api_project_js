@@ -1,6 +1,6 @@
 {
-  "name": "template",
-  "description": "default",
+  "name": "git_explore",
+  "description": "a project that uses github apis to return names and repo",
   "main": "gulpfile.js",
   "license": "ISC",
   "moduleType": [],
