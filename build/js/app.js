@@ -1,22 +1,32 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-exports.apiKey = "";
+exports.apiKey = "546ee333c33e70b48b237ac55869bc50711311b2";
 
 },{}],2:[function(require,module,exports){
-exports.Class = function(currentProperty, setProperty) {
-  this.currentProperty = currentProperty;
-  this.setProperty = setProperty;
+var apiKey = require('./../.env').apiKey;
+exports.getRepos = function(){
+  $.get('https://api.github.com/users/daneden?access_token=' + apiKey).then(function(response){
+    console.log(response);
+  }).fail(function(error){
+    console.log(error.responseJSON.message);
+  });
 };
 
-exports.Class.prototype.triggerAlarm = function(currentProperty, setProperty) {
-  if (currentProperty === setProperty) {
-    return true;
-  }
-  else {
-    return false;
-  }
+},{"./../.env":1}],3:[function(require,module,exports){
+exports.Repo = function(repo_name, repo_description) {
+  this.repo_name = repo_name;
+  this.repo_description = repo_description;
 };
 
-},{}],3:[function(require,module,exports){
+// exports.Repo.prototype.triggerAlarm = function(repo_name, repo_description) {
+//   if (repo_name === repo_description) {
+//     return true;
+//   }
+//   else {
+//     return false;
+//   }
+// };
+
+},{}],4:[function(require,module,exports){
 //! moment.js
 //! version : 2.12.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -3705,8 +3715,9 @@ exports.Class.prototype.triggerAlarm = function(currentProperty, setProperty) {
     return _moment;
 
 }));
-},{}],4:[function(require,module,exports){
-var Class = require('./../js/class.js').Class;
+},{}],5:[function(require,module,exports){
+var Repo = require('./../js/repo.js').Repo;
+var getRepos = require('./../js/get_repos.js').getRepos;
 var moment = require('moment');
 var apiKey = require('./../.env').apiKey;
 
@@ -3716,4 +3727,26 @@ $(document).ready(function(){
 
   });
 
-},{"./../.env":1,"./../js/class.js":2,"moment":3}]},{},[4]);
+$(document).ready(function(){
+  $('#search_form').submit(function(event){
+    event.preventDefault();
+
+    var user_name = $('#user_name').val();
+
+    $.get('https://api.github.com/users/' + user_name + '/repos?access_token=' + apiKey).then(function(response){
+      console.log(response);
+      console.log(response[0].name);
+      console.log(response[0].description);
+
+    }).fail(function(error){
+      console.log("bummer");
+    });
+
+
+
+
+
+  });
+});
+
+},{"./../.env":1,"./../js/get_repos.js":2,"./../js/repo.js":3,"moment":4}]},{},[5]);
