@@ -3,11 +3,33 @@ exports.apiKey = "546ee333c33e70b48b237ac55869bc50711311b2";
 
 },{}],2:[function(require,module,exports){
 var apiKey = require('./../.env').apiKey;
+// var Repo = require('./../js/repo.js').Repo;
 exports.getRepos = function(){
-  $.get('https://api.github.com/users/daneden?access_token=' + apiKey).then(function(response){
-    console.log(response);
+  var user_name = $('#user_name').val();
+  $.get('https://api.github.com/users/' + user_name + '/repos?access_token=' + apiKey).then(function(response){
+
+    $('#results').text('');
+    for (var property of response) {
+      $('#results').append('<h2>Repo Name: ' + property.name + '</h2></br>');
+      $('#results').append('<h2>Repo Description: ' + property.description + '</h2></br>');
+      // $('#results').append('<hr>');
+    }
+    // var repos = response;
+    // console.log(repos);
+    // for (var i = 0; i <= response.length; i++) {
+    // var repo_name = response[i].name;
+    // var repo_description = response[i].description;
+
+    // newRepo = new Repo(repo_name, repo_description);
+    // $('#repo_name').append("Repo Name: " + newRepo.repo_name + newRepo.repo_description);
+    // console.log(repo_name);
+    // console.log(repo_description);
+    // console.log(newRepo);
+
+    // }
+
   }).fail(function(error){
-    console.log(error.responseJSON.message);
+    console.log("There was a big ole' error in trying to find that.");
   });
 };
 
@@ -16,15 +38,6 @@ exports.Repo = function(repo_name, repo_description) {
   this.repo_name = repo_name;
   this.repo_description = repo_description;
 };
-
-// exports.Repo.prototype.triggerAlarm = function(repo_name, repo_description) {
-//   if (repo_name === repo_description) {
-//     return true;
-//   }
-//   else {
-//     return false;
-//   }
-// };
 
 },{}],4:[function(require,module,exports){
 //! moment.js
@@ -3721,30 +3734,17 @@ var getRepos = require('./../js/get_repos.js').getRepos;
 var moment = require('moment');
 var apiKey = require('./../.env').apiKey;
 
-$(document).ready(function(){
-
-
-
-  });
+// $(document).ready(function(){
+//
+//
+//
+//   });
 
 $(document).ready(function(){
   $('#search_form').submit(function(event){
     event.preventDefault();
 
-    var user_name = $('#user_name').val();
-
-    $.get('https://api.github.com/users/' + user_name + '/repos?access_token=' + apiKey).then(function(response){
-      console.log(response);
-      console.log(response[0].name);
-      console.log(response[0].description);
-
-    }).fail(function(error){
-      console.log("bummer");
-    });
-
-
-
-
+    getRepos();
 
   });
 });
