@@ -11,7 +11,7 @@ Users can enter in a user name; the app will return the repo name and repo descr
 ## Setup/Installation Requirements
 
 ### You will need npm and bower to be installed on your computer.
-# Here are links to both:
+#### Here are links to both:
 * npm https://www.npmjs.com/
 * bower http://bower.io/
 
