@@ -1,6 +1,6 @@
 # _Git Explorer_
 
-#### _Allows user to search github by a user name and returns their repo names and descriptions, 3.04.2016_
+#### _Allows user to search github by a user name and returns their repo names and descriptions, 3.18.2016_
 
 #### By _**Josh Overly**_
 
@@ -10,12 +10,12 @@ Users can enter in a user name; the app will return the repo name and repo descr
 
 ## Setup/Installation Requirements
 
-# You will need npm and bower to be installed on your computer.
+### You will need npm and bower to be installed on your computer.
 # Here are links to both:
 * npm https://www.npmjs.com/
 * bower http://bower.io/
 
-# After npm and bower are functioning on your machine:
+### After npm and bower are functioning on your machine:
 * Open the terminal on your computer
 * Go to link: https://github.com/jos-h20/git_api_project_js
 * Copy it.
