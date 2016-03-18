@@ -3,43 +3,39 @@ exports.apiKey = "546ee333c33e70b48b237ac55869bc50711311b2";
 
 },{}],2:[function(require,module,exports){
 var apiKey = require('./../.env').apiKey;
+var time = require('./../js/time.js').time;
 // var Repo = require('./../js/repo.js').Repo;
 exports.getRepos = function(){
   var user_name = $('#user_name').val();
   $.get('https://api.github.com/users/' + user_name + '/repos?access_token=' + apiKey).then(function(response){
-
-    $('#results').text('');
+console.log(response);
     for (var property of response) {
-      $('#results').append('<h2>Repo Name: ' + property.name + '</h2></br>');
-      $('#results').append('<h2>Repo Description: ' + property.description + '</h2></br>');
-      // $('#results').append('<hr>');
+      $('#results').append('<h3>Repo Name: <em>' + property.name + '</em></h3></br>');
+      $('#results').append('<h4>Repo Description:</h4></br><h4>' + property.description + '</h4></br>');
+      $('#results').append('<h4>It was created on ' + time(property.pushed_at) + '.</h4></br>');
+      $('#results').append('<h4>It was last updated on ' + time(property.updated_at) + '.</h4></br>');
     }
-    // var repos = response;
-    // console.log(repos);
-    // for (var i = 0; i <= response.length; i++) {
-    // var repo_name = response[i].name;
-    // var repo_description = response[i].description;
-
-    // newRepo = new Repo(repo_name, repo_description);
-    // $('#repo_name').append("Repo Name: " + newRepo.repo_name + newRepo.repo_description);
-    // console.log(repo_name);
-    // console.log(repo_description);
-    // console.log(newRepo);
-
-    // }
 
   }).fail(function(error){
     console.log("There was a big ole' error in trying to find that.");
   });
 };
 
-},{"./../.env":1}],3:[function(require,module,exports){
+},{"./../.env":1,"./../js/time.js":4}],3:[function(require,module,exports){
 exports.Repo = function(repo_name, repo_description) {
   this.repo_name = repo_name;
   this.repo_description = repo_description;
 };
 
 },{}],4:[function(require,module,exports){
+var moment = require('moment');
+
+exports.time = function (unix_time) {
+var time = moment(unix_time).format("dddd, MMMM Do YYYY, h:mm a");
+return time;
+};
+
+},{"moment":5}],5:[function(require,module,exports){
 //! moment.js
 //! version : 2.12.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -3728,25 +3724,20 @@ exports.Repo = function(repo_name, repo_description) {
     return _moment;
 
 }));
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var Repo = require('./../js/repo.js').Repo;
 var getRepos = require('./../js/get_repos.js').getRepos;
-var moment = require('moment');
 var apiKey = require('./../.env').apiKey;
 
-// $(document).ready(function(){
-//
-//
-//
-//   });
 
 $(document).ready(function(){
   $('#search_form').submit(function(event){
     event.preventDefault();
-
+    $('#results').empty();
+    $('#date').text(moment(
+"2014-09-02T22:10:13Z").format("dddd, MMMM Do YYYY, h:mm a"));
     getRepos();
-
   });
 });
 
-},{"./../.env":1,"./../js/get_repos.js":2,"./../js/repo.js":3,"moment":4}]},{},[5]);
+},{"./../.env":1,"./../js/get_repos.js":2,"./../js/repo.js":3}]},{},[6]);
