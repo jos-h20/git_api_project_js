@@ -1,10 +1,9 @@
 var apiKey = require('./../.env').apiKey;
 var time = require('./../js/time.js').time;
 
-exports.getRepos = function(){
-  var user_name = $('#user_name').val();
-  $.get('https://api.github.com/users/' + user_name + '/repos?access_token=' + apiKey).then(function(response){
-console.log(response);
+exports.getRepos = function(userName){
+  $.get('https://api.github.com/users/' + userName + '/repos?access_token=' + apiKey).then(function(response){
+    console.log(response);
     for (var property of response) {
       $('.index').show();
       $('#results').append('<h3>Repo Name: <strong>' + property.name + '</strong></h3></br>');
