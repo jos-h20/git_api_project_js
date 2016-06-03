@@ -4,7 +4,7 @@ $light_color: #7ea3c9;
 
 body {
 background-color: darkgray;
-background-image: url("/build/images/background.jpg");
+background-image: url("/../images/background.jpg");
 color: lightgray;
 background-repeat: no-repeat;
 
@@ -13,7 +13,7 @@ background-repeat: no-repeat;
 .jumbotron {
     color: #7ea3c9;
     width: 100%;
-    background-image: url("/build/images/header.jpg");
+    background-image: url("/../images/header.jpg");
     background-size: cover;
     padding-left: 20px;
     padding-right: 20px;
